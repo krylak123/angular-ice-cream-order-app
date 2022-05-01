@@ -11,9 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { ShellComponent } from './shell.component';
+import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
 
 @NgModule({
-  declarations: [ShellComponent],
+  declarations: [ShellComponent, ContentWrapperComponent],
   providers: [],
   imports: [
     CommonModule,
