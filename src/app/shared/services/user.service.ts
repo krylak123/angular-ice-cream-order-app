@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { of, ReplaySubject, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { of, switchMap } from 'rxjs';
+import { AppState } from 'src/app/store/app.state';
+import { UserActions, UserState } from 'src/app/store/user';
 
 export interface User {
   uid: string;
@@ -28,19 +31,13 @@ export interface OrderDetails {
   providedIn: 'root',
 })
 export class UserService {
-  private user = new ReplaySubject<User | undefined>(1);
-
-  constructor(private db: AngularFireDatabase) {}
-
-  public get user$() {
-    return this.user.asObservable();
-  }
+  constructor(private db: AngularFireDatabase, private store: Store<AppState>) {}
 
   public setUser(uid: string | undefined) {
     this.db
-      .list<User>('users')
+      .list<UserState>('users')
       .valueChanges()
       .pipe(switchMap(res => of(res.find(item => item.uid === uid))))
-      .subscribe(user => this.user.next(user));
+      .subscribe(user => this.store.dispatch(UserActions.SET_USER({ user })));
   }
 }
