@@ -15,6 +15,7 @@ import { environment } from '@environments/environment';
 
 import { AppState } from './store/app.state';
 import { authReducer } from './store/auth';
+import { userReducer } from './store/user';
 
 import { AppComponent } from './app.component';
 
@@ -32,6 +33,7 @@ import { AppComponent } from './app.component';
     AngularFireDatabaseModule,
     StoreModule.forRoot<AppState>({
       auth: authReducer,
+      user: userReducer,
     }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
