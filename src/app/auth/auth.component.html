@@ -5,10 +5,34 @@
       <mat-card-subtitle>zaloguj się</mat-card-subtitle>
     </header>
   </mat-card-header>
+  <mat-divider></mat-divider>
   <mat-card-content>
-    <form class="login__form">
-      <mat-form-field appearance="standard"></mat-form-field>
-      <mat-form-field appearance="standard"></mat-form-field>
+    <form [formGroup]="authForm" (submit)="handleOnSubmitLoginForm()" class="login__form">
+      <div class="login__inputs-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Wpisz swój mail</mat-label>
+          <input
+            type="email"
+            autocomplete="username"
+            matInput
+            placeholder="siem@no.com"
+            formControlName="email"
+            required />
+          <mat-error *ngIf="emailControl.hasError('required')">Pole Email wymagane</mat-error>
+          <mat-error *ngIf="emailControl.hasError('email')">To nie jest email</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Wpisz swoje hasło</mat-label>
+          <input
+            type="password"
+            autocomplete="current-password"
+            matInput
+            placeholder="******"
+            formControlName="password"
+            required />
+          <mat-error *ngIf="passwordControl.hasError('required')">Pole hasło wymagane</mat-error>
+        </mat-form-field>
+      </div>
       <button mat-raised-button color="primary">zaloguj</button>
     </form>
   </mat-card-content>

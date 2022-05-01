@@ -1,16 +1,59 @@
 :host {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   height: 100vh;
 }
 
 .login {
-  margin: 0 auto;
+  width: 100%;
   text-align: center;
 
   &__form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2rem 0 0.5rem !important;
+  }
+
+  &__inputs-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (orientation: landscape) {
+    height: 100%;
+
+    &__inputs-container {
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 640px) and (orientation: landscape) {
+    width: auto;
+    height: auto;
+  }
+
+  @media screen and (min-width: 768px) and (orientation: portrait) {
+    padding: 2rem 5rem;
+    width: auto;
+  }
+
+  @media screen and (min-width: 768px) and (orientation: landscape) {
+    padding: 2rem 5rem;
+
+    &__inputs-container {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape) {
+    &__inputs-container {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 }

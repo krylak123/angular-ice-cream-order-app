@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AuthComponent } from './auth.component';
 
@@ -16,6 +17,7 @@ import { AuthComponent } from './auth.component';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatDividerModule,
     RouterModule.forChild([
       {
         path: '',
