@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { of, ReplaySubject, switchMap, tap } from 'rxjs';
+import { of, ReplaySubject, switchMap } from 'rxjs';
 
 export interface User {
   uid: string;
@@ -40,10 +40,7 @@ export class UserService {
     this.db
       .list<User>('users')
       .valueChanges()
-      .pipe(
-        switchMap(res => of(res.find(item => item.uid === uid))),
-        tap(console.log)
-      )
+      .pipe(switchMap(res => of(res.find(item => item.uid === uid))))
       .subscribe(user => this.user.next(user));
   }
 }
