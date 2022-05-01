@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthFormService } from './auth-form.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -9,9 +10,10 @@ import { AuthFormService } from './auth-form.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent implements OnInit {
+  public isError$ = this.authService.isError$;
   public authForm!: FormGroup;
 
-  constructor(private authFormService: AuthFormService) {}
+  constructor(private authFormService: AuthFormService, private authService: AuthService) {}
 
   public get emailControl() {
     return this.authForm.controls['email'];
@@ -30,6 +32,9 @@ export class AuthComponent implements OnInit {
 
     if (this.authForm.invalid) return;
 
-    console.log(this.authForm.value);
+    const email = this.authForm.value['email'];
+    const password = this.authForm.value['password'];
+
+    this.authService.logIn(email, password);
   }
 }

@@ -33,7 +33,8 @@
           <mat-error *ngIf="passwordControl.hasError('required')">Pole hasło wymagane</mat-error>
         </mat-form-field>
       </div>
-      <button mat-raised-button color="primary">zaloguj</button>
+      <mat-error *ngIf="isError$ | async">Podane dane są nieprawidłowe</mat-error>
+      <button mat-raised-button color="primary" [disabled]="this.authForm.invalid">zaloguj</button>
     </form>
   </mat-card-content>
 </mat-card>
