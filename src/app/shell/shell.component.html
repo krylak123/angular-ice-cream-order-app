@@ -14,6 +14,7 @@
         >favorite</mat-icon
       >
     </h1>
+    <button mat-raised-button color="warn" (click)="handleLogOut()">wyloguj</button>
   </header>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" [class.mobile]="isHandset$ | async">

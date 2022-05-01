@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from '@shared/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -9,13 +10,14 @@ import { RouterModule } from '@angular/router';
         loadChildren: async () => (await import('./auth/auth.module')).AuthModule,
       },
       {
-        path: 'app',
+        path: 'dashboard',
+        canActivate: [AuthGuard],
         loadChildren: async () => (await import('./shell/shell.module')).ShellModule,
       },
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'app',
+        redirectTo: 'dashboard',
       },
       {
         path: '**',
