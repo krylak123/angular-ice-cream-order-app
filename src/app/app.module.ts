@@ -6,14 +6,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { authReducer } from './store/auth';
+
 import { AppComponent } from './app.component';
+import { AppState } from './store/app.state';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot<AppState>({
+      auth: authReducer,
+    }),
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
