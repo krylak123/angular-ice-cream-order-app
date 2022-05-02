@@ -35,4 +35,12 @@ export class UnitsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe();
   }
+
+  public deleteUnits(key: string) {
+    this.unitsListService.deleteUnits(key);
+  }
+
+  public editUnits(key: string, name: string) {
+    this.openDialog(key, name);
+  }
 }
