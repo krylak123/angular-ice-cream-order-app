@@ -7,10 +7,7 @@ import { of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
 import { productActions, ProductState } from 'src/app/store/product';
-
-// export interface ApiResponseProducts {
-//   name: string;
-// }
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -40,8 +37,10 @@ export class ProductsService {
   }
 
   public addProducts(name: string) {
+    const uid = uuidv4();
+
     this.http
-      .post(`${environment.firebaseConfig.databaseURL}/products.json`, { name })
+      .post(`${environment.firebaseConfig.databaseURL}products.json`, { name, uid })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {

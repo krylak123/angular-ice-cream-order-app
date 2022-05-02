@@ -23,5 +23,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+    <p *ngIf="!data.length">brak danych</p>
   </ng-container>
 </app-content-wrapper>
