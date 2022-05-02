@@ -12,6 +12,7 @@ export class UserCreatorFormService {
       name: this.fb.control('', [Validators.required]),
       surname: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
       phone: this.fb.control('', [Validators.required]),
     });
 

@@ -39,6 +39,17 @@
         <mat-error *ngIf="emailControl.hasError('email')">To nie jest email</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
+        <mat-label>Wpisz hasło</mat-label>
+        <input
+          type="password"
+          autocomplete="new-password"
+          matInput
+          placeholder="******"
+          formControlName="password"
+          required />
+        <mat-error *ngIf="passwordControl.hasError('required')">Pole Email wymagane</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Wpisz telefon</mat-label>
         <input
           type="tel"
@@ -49,8 +60,13 @@
           required />
         <mat-error *ngIf="phoneControl.hasError('required')">Pole Email wymagane</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="this.userCreatorForm.invalid">
-        zaloguj
+      <mat-error *ngIf="isError$ | async">UPS... coś poszło nie tak</mat-error>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="this.userCreatorForm.invalid || (isLoading$ | async)">
+        <span *ngIf="(isLoading$ | async) === false">dodaj</span>
+        <span *ngIf="isLoading$ | async">dodawanie...</span>
       </button>
     </form>
   </mat-card>
