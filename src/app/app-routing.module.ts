@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from '@shared/guards/auth.guard';
+// import { AuthGuard } from '@shared/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -11,7 +11,7 @@ import { AuthGuard } from '@shared/guards/auth.guard';
       },
       {
         path: 'dashboard',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: async () => (await import('./shell/shell.module')).ShellModule,
       },
       {
