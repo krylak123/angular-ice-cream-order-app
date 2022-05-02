@@ -16,6 +16,7 @@ import { environment } from '@environments/environment';
 import { AppState } from './store/app.state';
 import { authReducer } from './store/auth';
 import { userReducer } from './store/user';
+import { productReducer } from './store/product';
 
 import { AppComponent } from './app.component';
 
@@ -34,6 +35,7 @@ import { AppComponent } from './app.component';
     StoreModule.forRoot<AppState>({
       auth: authReducer,
       user: userReducer,
+      product: productReducer,
     }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
