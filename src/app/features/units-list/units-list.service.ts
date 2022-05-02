@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
-import { UsersActions, UsersState } from 'src/app/store/users';
+import { UnitsActions, UnitsState } from 'src/app/store/units';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +20,12 @@ export class UnitsListService {
 
   public getUnits() {
     this.db
-      .list<UsersState>('units')
+      .list<UnitsState>('units')
       .snapshotChanges()
       .pipe(
         map(action =>
           action.map(a => {
-            const res: UsersState = {
+            const res: UnitsState = {
               key: a.payload.key,
               data: a.payload.val(),
             };
@@ -33,7 +33,7 @@ export class UnitsListService {
           })
         ),
         tap(res => {
-          this.store.dispatch(UsersActions.SET_USERS_LIST({ usersList: res }));
+          this.store.dispatch(UnitsActions.SET_USERS_LIST({ usersList: res }));
         }),
         catchError(err => of(err))
       )
