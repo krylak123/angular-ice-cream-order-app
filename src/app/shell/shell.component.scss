@@ -39,3 +39,16 @@
     letter-spacing: 0;
   }
 }
+
+.btn {
+  display: block;
+
+  &.mobile {
+    display: none;
+  }
+}
+
+.center {
+  display: block;
+  margin: 0 auto;
+}
