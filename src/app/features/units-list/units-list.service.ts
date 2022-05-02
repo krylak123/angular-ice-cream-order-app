@@ -6,34 +6,34 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
-import { productActions, ProductState } from 'src/app/store/product';
+import { UnitsActions, UnitsState } from 'src/app/store/units';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
+export class UnitsListService {
   constructor(
     private db: AngularFireDatabase,
     private http: HttpClient,
     private store: Store<AppState>
   ) {}
 
-  public getProducts() {
+  public getUnits() {
     this.db
-      .list<ProductState>('products')
+      .list<UnitsState>('units')
       .snapshotChanges()
       .pipe(
         map(action =>
           action.map(a => {
-            const res: ProductState = {
+            const res: UnitsState = {
               key: a.payload.key,
-              name: a.payload.val(),
+              data: a.payload.val(),
             };
             return res;
           })
         ),
         tap(res => {
-          this.store.dispatch(productActions.SET_PRODUCT_LIST({ productList: res }));
+          this.store.dispatch(UnitsActions.SET_USERS_LIST({ usersList: res }));
         }),
         catchError(err => of(err))
       )
@@ -44,9 +44,9 @@ export class ProductsService {
       });
   }
 
-  public addProducts(name: string) {
+  public addUnits(unit: string) {
     this.http
-      .post(`${environment.firebaseConfig.databaseURL}products.json`, { name })
+      .post(`${environment.firebaseConfig.databaseURL}units.json`, { unit })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -55,9 +55,9 @@ export class ProductsService {
       });
   }
 
-  public deleteProducts(key: string) {
+  public deleteUnits(key: string) {
     this.http
-      .delete(`${environment.firebaseConfig.databaseURL}products/${key}.json`)
+      .delete(`${environment.firebaseConfig.databaseURL}units/${key}.json`)
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -66,9 +66,9 @@ export class ProductsService {
       });
   }
 
-  public editProducts(key: string, name: string) {
+  public editUnits(key: string, unit: string) {
     this.http
-      .patch(`${environment.firebaseConfig.databaseURL}products/${key}.json`, { name })
+      .patch(`${environment.firebaseConfig.databaseURL}units/${key}.json`, { unit })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{ data.key ? 'Edytuj jednostkę' : 'Dodaj nową jednostkę' }}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ data.key ? 'Edytuj jednostkę' : 'Dodaj nową jednostkę' }}</mat-label>
+    <input
+      type="text"
+      autocomplete="name"
+      matInput
+      placeholder="pudełko 5kg"
+      [formControl]="unit"
+      required />
+    <mat-error *ngIf="unit.hasError('required')">Pole jednostka jest wymagane</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    mat-dialog-close
+    (click)="handleOnSubmitProductForm()"
+    [disabled]="unit.invalid">
+    {{ data.key ? 'Edytuj' : 'Dodaj' }}
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>
