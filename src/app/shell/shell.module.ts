@@ -21,6 +21,8 @@ import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper
 import { UserCreatorComponent } from '@features/user-creator/user-creator.component';
 import { ProductsListComponent } from '@features/products-list/products-list.component';
 import { ProductAddComponent } from '@features/products-list/product-add/product-add.component';
+import { UnitsListComponent } from '@features/units-list/units-list.component';
+import { UnitsAddComponent } from '@features/units-list/units-add/units-add.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ProductAddComponent } from '@features/products-list/product-add/product
     UserCreatorComponent,
     ProductsListComponent,
     ProductAddComponent,
+    UnitsListComponent,
+    UnitsAddComponent,
   ],
   providers: [],
   imports: [
@@ -62,9 +66,13 @@ import { ProductAddComponent } from '@features/products-list/product-add/product
             component: ProductsListComponent,
           },
           {
+            path: 'units',
+            component: UnitsListComponent,
+          },
+          {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'products',
+            redirectTo: 'units',
           },
         ],
       },
