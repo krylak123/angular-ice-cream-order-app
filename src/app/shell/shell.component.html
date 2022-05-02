@@ -14,7 +14,14 @@
         >favorite</mat-icon
       >
     </h1>
-    <button mat-raised-button color="warn" (click)="handleLogOut()">wyloguj</button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="handleLogOut()"
+      class="btn"
+      [class.mobile]="isHandset$ | async">
+      wyloguj
+    </button>
   </header>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" [class.mobile]="isHandset$ | async">
@@ -25,6 +32,15 @@
     [mode]="(isHandset$ | async) ? 'push' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
+    <span class="separator"></span>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="handleLogOut()"
+      class="btn center"
+      [class.mobile]="(isHandset$ | async) === false">
+      wyloguj
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <main class="main">
