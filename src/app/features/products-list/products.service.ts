@@ -68,7 +68,7 @@ export class ProductsService {
 
   public editProducts(key: string, name: string) {
     this.http
-      .patch(`${environment.firebaseConfig.databaseURL}products/${key}.json`, { name: name })
+      .patch(`${environment.firebaseConfig.databaseURL}products/${key}.json`, { name })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
