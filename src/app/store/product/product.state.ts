@@ -1,4 +1,4 @@
 export interface ProductState {
-  name: string;
-  uid: string;
+  key: string | null;
+  name: ProductState | null;
 }

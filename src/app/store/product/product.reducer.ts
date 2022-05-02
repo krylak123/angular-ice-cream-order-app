@@ -7,6 +7,6 @@ const initialState: ProductState[] = [];
 export const productReducer = createReducer(
   initialState,
   on(productActions.SET_PRODUCT_LIST, (_, props) => {
-    return [...props.res];
+    return [...props.productList];
   })
 );

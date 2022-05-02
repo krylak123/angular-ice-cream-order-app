@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
@@ -18,7 +19,8 @@ export class ProductsListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private productsService: ProductsService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private db: AngularFireDatabase
   ) {}
 
   public ngOnInit(): void {
@@ -29,5 +31,9 @@ export class ProductsListComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductAddComponent);
 
     dialogRef.afterClosed().subscribe();
+  }
+
+  public deleteProducts(key: string) {
+    this.productsService.deleteProducts(key);
   }
 }
