@@ -1,0 +1,57 @@
+<app-content-wrapper title="Stwórz nowego klienta">
+  <mat-card>
+    <mat-card-title>Wpisz dane</mat-card-title>
+    <mat-card-subtitle>nowego klienta</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <form [formGroup]="userCreatorForm" (submit)="handleOnSubmitCreateForm()" class="create">
+      <mat-form-field appearance="fill">
+        <mat-label>Wpisz imię</mat-label>
+        <input
+          type="text"
+          autocomplete="name"
+          matInput
+          placeholder="Krystian"
+          formControlName="name"
+          required />
+        <mat-error *ngIf="nameControl.hasError('required')">Pole Email wymagane</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Wpisz nazwisko</mat-label>
+        <input
+          type="text"
+          autocomplete="name"
+          matInput
+          placeholder="Grzelak"
+          formControlName="surname"
+          required />
+        <mat-error *ngIf="surnameControl.hasError('required')">Pole Email wymagane</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Wpisz email</mat-label>
+        <input
+          type="email"
+          autocomplete="email"
+          matInput
+          placeholder="siem@no.com"
+          formControlName="email"
+          required />
+        <mat-error *ngIf="emailControl.hasError('required')">Pole Email wymagane</mat-error>
+        <mat-error *ngIf="emailControl.hasError('email')">To nie jest email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Wpisz telefon</mat-label>
+        <input
+          type="tel"
+          autocomplete="tel"
+          matInput
+          placeholder="111222333"
+          formControlName="phone"
+          required />
+        <mat-error *ngIf="phoneControl.hasError('required')">Pole Email wymagane</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="this.userCreatorForm.invalid">
+        zaloguj
+      </button>
+    </form>
+  </mat-card>
+</app-content-wrapper>
