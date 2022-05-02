@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>Dodaj nowy smak</h2>
+<h2 mat-dialog-title>{{ data.key ? 'Edytuj smak' : 'Dodaj nowy smak' }}</h2>
 <mat-dialog-content class="mat-typography">
   <mat-form-field appearance="fill">
-    <mat-label>Wpisz nazwe</mat-label>
+    <mat-label>{{ data.key ? 'Edytuj smak' : 'Dodaj nowy smak' }}</mat-label>
     <input
       type="text"
       autocomplete="name"
@@ -9,7 +9,7 @@
       placeholder="czekoladowe"
       [formControl]="name"
       required />
-    <mat-error *ngIf="name.hasError('required')">Pole Email wymagane</mat-error>
+    <mat-error *ngIf="name.hasError('required')">Pole nazwa jest wymagane</mat-error>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
@@ -18,7 +18,7 @@
     mat-dialog-close
     (click)="handleOnSubmitProductForm()"
     [disabled]="name.invalid">
-    Dodaj
+    {{ data.key ? 'Edytuj' : 'Dodaj' }}
   </button>
   <button mat-button mat-dialog-close>Anuluj</button>
 </mat-dialog-actions>

@@ -15,7 +15,12 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Akcje</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-stroked-button color="primary">Edytuj</button>
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="editProducts(element.key, element.name)">
+            Edytuj
+          </button>
           <button mat-raised-button color="warn" (click)="deleteProducts(element.key)">Usuń</button>
         </td>
       </ng-container>

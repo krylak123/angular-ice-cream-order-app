@@ -27,13 +27,22 @@ export class ProductsListComponent implements OnInit {
     this.productsService.getProducts();
   }
 
-  public openDialog() {
-    const dialogRef = this.dialog.open(ProductAddComponent);
+  public openDialog(key?: string, oldName?: string) {
+    const dialogRef = this.dialog.open(ProductAddComponent, {
+      data: {
+        key,
+        oldName,
+      },
+    });
 
     dialogRef.afterClosed().subscribe();
   }
 
   public deleteProducts(key: string) {
     this.productsService.deleteProducts(key);
+  }
+
+  public editProducts(key: string, name: string) {
+    this.openDialog(key, name);
   }
 }

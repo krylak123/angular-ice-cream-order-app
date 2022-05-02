@@ -1,6 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductsService } from '../products.service';
+
+interface DialogData {
+  key: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-product-add',
@@ -11,7 +17,10 @@ import { ProductsService } from '../products.service';
 export class ProductAddComponent {
   public name: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   public handleOnSubmitProductForm() {
     this.name.markAllAsTouched();
@@ -20,6 +29,10 @@ export class ProductAddComponent {
 
     const name = this.name.value;
 
-    this.productsService.addProducts(name);
+    if (this.data.key) {
+      this.productsService.editProducts(this.data.key, name);
+    } else {
+      this.productsService.addProducts(name);
+    }
   }
 }
