@@ -1,0 +1,7 @@
+.mat-typography {
+  padding: 0;
+
+  @media screen and (min-width: 360px) {
+    padding: 0 1.5rem;
+  }
+}

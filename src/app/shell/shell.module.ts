@@ -13,13 +13,23 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ShellComponent } from './shell.component';
 import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
 import { UserCreatorComponent } from '@features/user-creator/user-creator.component';
+import { ProductsListComponent } from '@features/products-list/products-list.component';
+import { ProductAddComponent } from '@features/products-list/product-add/product-add.component';
 
 @NgModule({
-  declarations: [ShellComponent, ContentWrapperComponent, UserCreatorComponent],
+  declarations: [
+    ShellComponent,
+    ContentWrapperComponent,
+    UserCreatorComponent,
+    ProductsListComponent,
+    ProductAddComponent,
+  ],
   providers: [],
   imports: [
     CommonModule,
@@ -35,6 +45,9 @@ import { UserCreatorComponent } from '@features/user-creator/user-creator.compon
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
+    MatDialogModule,
+
     RouterModule.forChild([
       {
         path: '',
@@ -45,9 +58,13 @@ import { UserCreatorComponent } from '@features/user-creator/user-creator.compon
             component: UserCreatorComponent,
           },
           {
+            path: 'products',
+            component: ProductsListComponent,
+          },
+          {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'users/create',
+            redirectTo: 'products',
           },
         ],
       },

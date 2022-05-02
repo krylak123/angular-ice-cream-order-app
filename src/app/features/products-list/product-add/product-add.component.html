@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Dodaj nowy smak</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field appearance="fill">
+    <mat-label>Wpisz nazwe</mat-label>
+    <input
+      type="text"
+      autocomplete="name"
+      matInput
+      placeholder="czekoladowe"
+      [formControl]="name"
+      required />
+    <mat-error *ngIf="name.hasError('required')">Pole Email wymagane</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    mat-dialog-close
+    (click)="handleOnSubmitProductForm()"
+    [disabled]="name.invalid">
+    Dodaj
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>
