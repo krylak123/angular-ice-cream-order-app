@@ -1,25 +1,27 @@
 <app-content-wrapper title="Lista smaków lodów">
   <button mat-raised-button color="primary" (click)="openDialog()">Dodaj nowy smak</button>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>Lp.</th>
-      <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
-    </ng-container>
+  <ng-container *ngIf="dataSource$ | async as data">
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>Lp.</th>
+        <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Nazwa</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Akcje</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-stroked-button color="primary">Edytuj</button>
-        <button mat-raised-button color="warn">Usuń</button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Akcje</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-stroked-button color="primary">Edytuj</button>
+          <button mat-raised-button color="warn">Usuń</button>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </ng-container>
 </app-content-wrapper>

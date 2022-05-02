@@ -2,25 +2,34 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { environment } from '@environments/environment';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { AppState } from 'src/app/store/app.state';
+import { productActions, ProductState } from 'src/app/store/product';
 
-export interface ApiResponseProducts {
-  name: string;
-}
+// export interface ApiResponseProducts {
+//   name: string;
+// }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private db: AngularFireDatabase, private http: HttpClient) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private http: HttpClient,
+    private store: Store<AppState>
+  ) {}
 
   public getProducts() {
     this.db
-      .list<ApiResponseProducts>('products')
+      .list<ProductState>('products')
       .valueChanges()
       .pipe(
-        tap(res => console.log(res)),
+        tap(res => {
+          this.store.dispatch(productActions.SET_PRODUCT_LIST({ res }));
+        }),
         catchError(err => of(err))
       )
       .subscribe(res => {
