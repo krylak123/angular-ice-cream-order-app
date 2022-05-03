@@ -26,6 +26,7 @@ import { UnitsListComponent } from '@features/units-list/units-list.component';
 import { UnitsAddComponent } from '@features/units-list/units-add/units-add.component';
 import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     UnitsListComponent,
     UnitsAddComponent,
     NavigationComponent,
+    FavoriteListComponent,
   ],
   providers: [],
   imports: [
@@ -76,13 +78,17 @@ import { NavigationComponent } from './navigation/navigation.component';
             component: ProductsListComponent,
           },
           {
+            path: 'products/favorite',
+            component: FavoriteListComponent,
+          },
+          {
             path: 'units',
             component: UnitsListComponent,
           },
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'users',
+            redirectTo: 'products/favorite',
           },
         ],
       },
