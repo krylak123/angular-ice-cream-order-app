@@ -33,11 +33,11 @@
     [opened]="(isHandset$ | async) === false">
     <div *ngIf="user$ | async as user" class="menu__header">
       <p class="menu__text">
-        Witaj <span class="menu__text menu__text--bold">{{ user.name }}</span>
+        Witaj <span class="menu__text menu__text--bold">{{ user.data.name }}</span>
       </p>
       <p class="menu__text">Zalogowano jako</p>
       <span class="menu__text menu__text--bold">{{
-        user.role === 'ADMIN' ? 'LODZIARZ' : 'KLIENT'
+        user.data.role === 'ADMIN' ? 'LODZIARZ' : 'KLIENT'
       }}</span>
     </div>
     <mat-divider></mat-divider>
