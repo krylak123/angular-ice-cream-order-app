@@ -1,0 +1,8 @@
+<mat-nav-list *ngIf="user$ | async as user">
+  <ng-container *ngFor="let item of navItems">
+    <ng-container *ngIf="item.role === user.role">
+      <a [routerLink]="item.path" mat-list-item>{{ item.name }}</a>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+</mat-nav-list>

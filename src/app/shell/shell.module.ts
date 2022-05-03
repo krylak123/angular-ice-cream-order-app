@@ -25,6 +25,7 @@ import { ProductAddComponent } from '@features/products-list/product-add/product
 import { UnitsListComponent } from '@features/units-list/units-list.component';
 import { UnitsAddComponent } from '@features/units-list/units-add/units-add.component';
 import { UsersListComponent } from '@features/users-list/users-list.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UsersListComponent } from '@features/users-list/users-list.component';
     ProductAddComponent,
     UnitsListComponent,
     UnitsAddComponent,
+    NavigationComponent,
   ],
   providers: [],
   imports: [
