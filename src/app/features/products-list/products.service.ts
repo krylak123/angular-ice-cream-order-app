@@ -27,7 +27,7 @@ export class ProductsService {
           action.map(a => {
             const res: ProductState = {
               key: a.payload.key,
-              name: a.payload.val(),
+              data: a.payload.val(),
             };
             return res;
           })
