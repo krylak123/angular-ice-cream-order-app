@@ -16,7 +16,8 @@ import { environment } from '@environments/environment';
 import { AppState } from './store/app.state';
 import { authReducer } from './store/auth';
 import { userReducer } from './store/user';
-import { usersReducer } from './store/units';
+import { usersReducer } from './store/users';
+import { unitsReducer } from './store/units';
 import { productReducer } from './store/product';
 
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { AppComponent } from './app.component';
       auth: authReducer,
       user: userReducer,
       users: usersReducer,
+      units: unitsReducer,
       product: productReducer,
     }),
     StoreDevtoolsModule.instrument({

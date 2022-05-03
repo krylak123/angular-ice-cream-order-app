@@ -4,7 +4,7 @@ import { UnitsState } from './units.state';
 
 const initialState: UnitsState[] = [];
 
-export const usersReducer = createReducer(
+export const unitsReducer = createReducer(
   initialState,
   on(UnitsActions.SET_UNITS_LIST, (_, props) => {
     return [...props.unitsList];
