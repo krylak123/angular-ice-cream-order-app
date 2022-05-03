@@ -1,0 +1,26 @@
+<app-content-wrapper title="Lista klientów">
+  <ng-container *ngIf="dataSource$ | async as data">
+    <mat-accordion>
+      <ng-container *ngFor="let el of data; let idx = index">
+        <mat-expansion-panel
+          *ngIf="el.data.role !== roleAdmin"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ el.data.name }} {{ el.data.surname }}</mat-panel-title>
+            <mat-panel-description> </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="container">
+            <div class="container__left">
+              <p>email: {{ el.data.email }}</p>
+              <p>phone: {{ el.data.phone }}</p>
+            </div>
+            <div class="container__right">
+              <button mat-raised-button color="warn" (click)="deleteUsers(el.key)">Usuń</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </ng-container>
+</app-content-wrapper>
