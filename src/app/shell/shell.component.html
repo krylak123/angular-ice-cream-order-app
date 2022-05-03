@@ -36,7 +36,9 @@
         Witaj <span class="menu__text menu__text--bold">{{ user.name }}</span>
       </p>
       <p class="menu__text">Zalogowano jako</p>
-      <span class="menu__text menu__text--bold">{{ user.role }}</span>
+      <span class="menu__text menu__text--bold">{{
+        user.role === 'ADMIN' ? 'LODZIARZ' : 'KLIENT'
+      }}</span>
     </div>
     <mat-divider></mat-divider>
     <app-navigation></app-navigation>
