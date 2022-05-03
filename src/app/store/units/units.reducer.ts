@@ -6,7 +6,7 @@ const initialState: UnitsState[] = [];
 
 export const usersReducer = createReducer(
   initialState,
-  on(UnitsActions.SET_USERS_LIST, (_, props) => {
-    return [...props.usersList];
+  on(UnitsActions.SET_UNITS_LIST, (_, props) => {
+    return [...props.unitsList];
   })
 );

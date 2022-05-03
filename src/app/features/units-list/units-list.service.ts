@@ -33,7 +33,7 @@ export class UnitsListService {
           })
         ),
         tap(res => {
-          this.store.dispatch(UnitsActions.SET_USERS_LIST({ usersList: res }));
+          this.store.dispatch(UnitsActions.SET_UNITS_LIST({ unitsList: res }));
         }),
         catchError(err => of(err))
       )
