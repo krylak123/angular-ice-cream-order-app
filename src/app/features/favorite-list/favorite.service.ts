@@ -33,6 +33,16 @@ export class FavoriteService {
     this.setFavorite(userKey, newArr);
   }
 
+  public removeToFavorite(userKey: string, favoriteList: string[], name: string) {
+    if (!favoriteList) return;
+
+    const temp = favoriteList.filter(item => item !== name);
+
+    const newArr: string[] = [...temp];
+
+    this.setFavorite(userKey, newArr);
+  }
+
   public setFavorite(userKey: string, favoriteIceCream: string[]) {
     this.http
       .patch(`${environment.firebaseConfig.databaseURL}users/${userKey}.json`, { favoriteIceCream })

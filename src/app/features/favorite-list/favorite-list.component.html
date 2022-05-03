@@ -14,7 +14,15 @@
 
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Akcje</th>
-          <td mat-cell *matCellDef="let element"></td>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a plus one icon"
+              (click)="removeProductsToFavorite(user.key, user.data.favoriteIceCream, element)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

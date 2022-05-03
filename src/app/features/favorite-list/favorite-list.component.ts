@@ -28,4 +28,8 @@ export class FavoriteListComponent implements OnInit {
   public addProductsToFavorite(userKey: string | null, usersFavorite: string[], name: string) {
     this.favoriteService.addToFavorite(String(userKey), usersFavorite, name);
   }
+
+  public removeProductsToFavorite(userKey: string | null, usersFavorite: string[], name: string) {
+    this.favoriteService.removeToFavorite(String(userKey), usersFavorite, name);
+  }
 }
