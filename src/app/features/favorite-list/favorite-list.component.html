@@ -40,7 +40,7 @@
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Dostępne smaki</th>
-          <td mat-cell *matCellDef="let element">{{ element.name.name }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.data.name }}</td>
         </ng-container>
 
         <ng-container matColumnDef="action">
@@ -51,10 +51,10 @@
               color="accent"
               aria-label="Example icon button with a plus one icon"
               [disabled]="
-                user.data.favoriteIceCream && user.data.favoriteIceCream.includes(element.name.name)
+                user.data.favoriteIceCream && user.data.favoriteIceCream.includes(element.data.name)
               "
               (click)="
-                addProductsToFavorite(user.key, user.data.favoriteIceCream, element.name.name)
+                addProductsToFavorite(user.key, user.data.favoriteIceCream, element.data.name)
               ">
               <mat-icon>favorite</mat-icon>
             </button>
