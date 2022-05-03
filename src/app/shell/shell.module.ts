@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ShellComponent } from './shell.component';
 import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
@@ -23,11 +24,13 @@ import { ProductsListComponent } from '@features/products-list/products-list.com
 import { ProductAddComponent } from '@features/products-list/product-add/product-add.component';
 import { UnitsListComponent } from '@features/units-list/units-list.component';
 import { UnitsAddComponent } from '@features/units-list/units-add/units-add.component';
+import { UsersListComponent } from '@features/users-list/users-list.component';
 
 @NgModule({
   declarations: [
     ShellComponent,
     ContentWrapperComponent,
+    UsersListComponent,
     UserCreatorComponent,
     ProductsListComponent,
     ProductAddComponent,
@@ -51,12 +54,17 @@ import { UnitsAddComponent } from '@features/units-list/units-add/units-add.comp
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    MatExpansionModule,
 
     RouterModule.forChild([
       {
         path: '',
         component: ShellComponent,
         children: [
+          {
+            path: 'users',
+            component: UsersListComponent,
+          },
           {
             path: 'users/create',
             component: UserCreatorComponent,
@@ -72,7 +80,7 @@ import { UnitsAddComponent } from '@features/units-list/units-add/units-add.comp
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'units',
+            redirectTo: 'users',
           },
         ],
       },

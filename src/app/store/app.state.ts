@@ -1,11 +1,13 @@
 import { AuthState } from './auth';
-import { ProductState } from './product';
-import { UnitsState } from './units';
 import { UserState } from './user';
+import { UsersState } from './users';
+import { UnitsState } from './units';
+import { ProductState } from './product';
 
 export interface AppState {
   auth: AuthState;
   user: UserState;
-  users: UnitsState[];
+  users: UsersState[];
+  units: UnitsState[];
   product: ProductState[];
 }
