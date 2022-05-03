@@ -31,7 +31,17 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'push' : 'side'"
     [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <div *ngIf="user$ | async as user" class="menu__header">
+      <p class="menu__text">
+        Witaj <span class="menu__text menu__text--bold">{{ user.name }}</span>
+      </p>
+      <p class="menu__text">Zalogowano jako</p>
+      <span class="menu__text menu__text--bold">{{
+        user.role === 'ADMIN' ? 'LODZIARZ' : 'KLIENT'
+      }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <app-navigation></app-navigation>
     <button
       mat-raised-button
       color="warn"
