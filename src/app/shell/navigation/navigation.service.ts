@@ -39,7 +39,7 @@ export class NavigationService {
     },
     {
       name: 'Lista ulubionych lodów',
-      path: 'products',
+      path: 'products/favorite',
       role: Role.USER,
     },
     {
