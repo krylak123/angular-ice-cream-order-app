@@ -13,7 +13,7 @@ import { UnitsListService } from './units-list.service';
 })
 export class UnitsListComponent implements OnInit {
   public displayedColumns: string[] = ['position', 'data', 'action'];
-  public dataSource$ = this.store.select(store => store.users);
+  public dataSource$ = this.store.select(store => store.units);
 
   constructor(
     public dialog: MatDialog,
