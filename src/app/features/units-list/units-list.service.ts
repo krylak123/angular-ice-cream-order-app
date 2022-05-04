@@ -46,7 +46,7 @@ export class UnitsListService {
 
   public addUnits(unit: string) {
     this.http
-      .post(`${environment.firebaseConfig.databaseURL}units.json`, { unit })
+      .post(`${environment.firebaseConfig.databaseURL}/units.json`, { unit })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -57,7 +57,7 @@ export class UnitsListService {
 
   public deleteUnits(key: string) {
     this.http
-      .delete(`${environment.firebaseConfig.databaseURL}units/${key}.json`)
+      .delete(`${environment.firebaseConfig.databaseURL}/units/${key}.json`)
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -68,7 +68,7 @@ export class UnitsListService {
 
   public editUnits(key: string, unit: string) {
     this.http
-      .patch(`${environment.firebaseConfig.databaseURL}units/${key}.json`, { unit })
+      .patch(`${environment.firebaseConfig.databaseURL}/units/${key}.json`, { unit })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
