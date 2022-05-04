@@ -45,7 +45,9 @@ export class FavoriteService {
 
   public setFavorite(userKey: string, favoriteIceCream: string[]) {
     this.http
-      .patch(`${environment.firebaseConfig.databaseURL}users/${userKey}.json`, { favoriteIceCream })
+      .patch(`${environment.firebaseConfig.databaseURL}/users/${userKey}.json`, {
+        favoriteIceCream,
+      })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
