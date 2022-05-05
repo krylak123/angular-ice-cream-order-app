@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ShellComponent } from './shell.component';
 import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
@@ -61,6 +62,7 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
     MatTableModule,
     MatDialogModule,
     MatExpansionModule,
+    MatSelectModule,
 
     RouterModule.forChild([
       {
