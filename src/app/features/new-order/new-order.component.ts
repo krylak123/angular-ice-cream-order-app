@@ -97,4 +97,13 @@ export class NewOrderComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.newOrderService.checkUserOrders(String(userKey), currentOrder, newOrder);
   }
+
+  public handleOrderLastOrder(userKey: string | null, order: Order) {
+    const currentOrder: Order = {
+      ...order,
+      date: new Date(),
+    };
+
+    this.newOrderService.setNewOrder(String(userKey), currentOrder);
+  }
 }

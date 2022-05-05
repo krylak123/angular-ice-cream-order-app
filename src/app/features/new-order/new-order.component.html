@@ -58,6 +58,14 @@
         <button mat-raised-button color="accent" [disabled]="orderFormArray.length && form.invalid">
           dodaj zamówienie
         </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          [disabled]="user.data.prevOrder.orderList?.length"
+          (click)="handleOrderLastOrder(user.key, user.data.prevOrder)">
+          zamów ostatnie zamówienie
+        </button>
       </form>
     </ng-container>
   </ng-container>

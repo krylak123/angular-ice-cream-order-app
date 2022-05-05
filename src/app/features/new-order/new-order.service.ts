@@ -27,10 +27,13 @@ export class NewOrderService {
 
   public checkUserOrders(userKey: string, currentOrder: Order, newOrder: Order) {
     this.setNewOrder(userKey, newOrder);
-    this.setPrevOrder(userKey, currentOrder);
+
+    if (currentOrder.date) {
+      this.setPrevOrder(userKey, currentOrder);
+    }
   }
 
-  private setNewOrder(userKey: string, currentOrder: Order) {
+  public setNewOrder(userKey: string, currentOrder: Order) {
     this.http
       .patch(`${environment.firebaseConfig.databaseURL}/users/${userKey}.json`, {
         currentOrder,
