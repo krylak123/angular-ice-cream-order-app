@@ -27,6 +27,7 @@ import { UnitsAddComponent } from '@features/units-list/units-add/units-add.comp
 import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
+import { NewOrderComponent } from '@features/new-order/new-order.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
     UnitsAddComponent,
     NavigationComponent,
     FavoriteListComponent,
+    NewOrderComponent,
   ],
   providers: [],
   imports: [
@@ -66,6 +68,10 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
         component: ShellComponent,
         children: [
           {
+            path: 'orders/create',
+            component: NewOrderComponent,
+          },
+          {
             path: 'users',
             component: UsersListComponent,
           },
@@ -88,7 +94,7 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'products/favorite',
+            redirectTo: 'orders/create',
           },
         ],
       },
