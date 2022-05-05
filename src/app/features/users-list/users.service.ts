@@ -46,7 +46,7 @@ export class UsersService {
 
   public deleteUsers(key: string) {
     this.http
-      .delete(`${environment.firebaseConfig.databaseURL}users/${key}.json`)
+      .delete(`${environment.firebaseConfig.databaseURL}/users/${key}.json`)
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {

@@ -46,7 +46,7 @@ export class ProductsService {
 
   public addProducts(name: string) {
     this.http
-      .post(`${environment.firebaseConfig.databaseURL}products.json`, { name })
+      .post(`${environment.firebaseConfig.databaseURL}/products.json`, { name })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -57,7 +57,7 @@ export class ProductsService {
 
   public deleteProducts(key: string) {
     this.http
-      .delete(`${environment.firebaseConfig.databaseURL}products/${key}.json`)
+      .delete(`${environment.firebaseConfig.databaseURL}/products/${key}.json`)
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
@@ -68,7 +68,7 @@ export class ProductsService {
 
   public editProducts(key: string, name: string) {
     this.http
-      .patch(`${environment.firebaseConfig.databaseURL}products/${key}.json`, { name })
+      .patch(`${environment.firebaseConfig.databaseURL}/products/${key}.json`, { name })
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
