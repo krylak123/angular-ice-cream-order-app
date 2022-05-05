@@ -1,8 +1,11 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from '@features/products-list/products.service';
 import { UnitsListService } from '@features/units-list/units-list.service';
 import { Store } from '@ngrx/store';
+import { format, parseISO } from 'date-fns';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { map, skip } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
 import { NewOrderFormService } from './new-order-form.service';
 import { NewOrderService, Order } from './new-order.service';
@@ -13,10 +16,12 @@ import { NewOrderService, Order } from './new-order.service';
   styleUrls: ['./new-order.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewOrderComponent implements OnInit {
+export class NewOrderComponent implements OnInit, OnDestroy {
   public user$ = this.store.select(store => store.user);
   public products$ = this.store.select(store => store.product);
   public units$ = this.store.select(store => store.units);
+  public canAddOrder = new BehaviorSubject<boolean>(true);
+  public subscription!: Subscription;
   public form!: FormGroup;
 
   constructor(
@@ -39,8 +44,30 @@ export class NewOrderComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.newOrderFormService.createForm();
 
+    this.subscription = this.user$
+      .pipe(
+        skip(1),
+        map(res => res.data.currentOrder.date)
+      )
+      .subscribe(date => {
+        if (!date) return this.canAddOrder.next(true);
+
+        const orderDate = format(parseISO(date), 'dd');
+        const nowDate = format(new Date(), 'dd');
+
+        if (orderDate === nowDate) {
+          this.canAddOrder.next(false);
+        } else {
+          this.canAddOrder.next(true);
+        }
+      });
+
     this.productsService.getProducts();
     this.unitsListService.getUnits();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public addOrderItem() {
@@ -57,7 +84,7 @@ export class NewOrderComponent implements OnInit {
     array.removeAt(index);
   }
 
-  public handleOnSubmit(userKey: string | null, currentOrder: Order | undefined) {
+  public handleOnSubmit(userKey: string | null, currentOrder: Order) {
     this.form.markAllAsTouched();
 
     if (this.form.invalid) return;

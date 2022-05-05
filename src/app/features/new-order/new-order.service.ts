@@ -25,12 +25,9 @@ export class NewOrderService {
 
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  public checkUserOrders(userKey: string, currentOrder: Order | undefined, newOrder: Order) {
-    if (currentOrder) {
-      console.log('hehe istnieje');
-    } else {
-      this.setNewOrder(userKey, newOrder);
-    }
+  public checkUserOrders(userKey: string, currentOrder: Order, newOrder: Order) {
+    this.setNewOrder(userKey, newOrder);
+    this.setPrevOrder(userKey, currentOrder);
   }
 
   private setNewOrder(userKey: string, currentOrder: Order) {
