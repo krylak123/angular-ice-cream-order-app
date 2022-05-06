@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skeleton {
+  &__title {
+    position: relative;
+    overflow: hidden;
+    width: 15rem;
+    height: 1.5rem;
+    background-color: #7788993f;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 10%;
+      height: 200%;
+      background-color: #abb0b641;
+      transform: translateY(-50%) rotate(30deg);
+      animation: skeleton-loader 1s infinite alternate both;
+    }
+  }
+}
+
+@keyframes skeleton-loader {
+  from {
+    transform: translateX(-1rem) translateY(-50%) rotate(30deg);
+  }
+
+  to {
+    transform: translateX(15rem) translateY(-50%) rotate(30deg);
+  }
+}
