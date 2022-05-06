@@ -18,7 +18,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 
+import { RoleGuard } from '@shared/guards/role.guard';
+import { Role } from '@shared/enums/role.enum';
+
 import { ShellComponent } from './shell.component';
+import { HomeComponent } from '@features/home/home.component';
 import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
 import { UserCreatorComponent } from '@features/user-creator/user-creator.component';
 import { ProductsListComponent } from '@features/products-list/products-list.component';
@@ -29,9 +33,6 @@ import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
 import { NewOrderComponent } from '@features/new-order/new-order.component';
-import { Role } from '@shared/enums/role.enum';
-import { RoleGuard } from '@shared/guards/role.guard';
-import { HomeComponent } from '@features/home/home.component';
 
 @NgModule({
   declarations: [
