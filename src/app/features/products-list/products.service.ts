@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
@@ -15,7 +16,8 @@ export class ProductsService {
   constructor(
     private db: AngularFireDatabase,
     private http: HttpClient,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private toastr: ToastrService
   ) {}
 
   public getProducts() {
@@ -39,7 +41,7 @@ export class ProductsService {
       )
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
         }
       });
   }
@@ -50,7 +52,9 @@ export class ProductsService {
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
+        } else {
+          this.toastr.success('Dodano smak', 'Sukces!');
         }
       });
   }
@@ -61,7 +65,9 @@ export class ProductsService {
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
+        } else {
+          this.toastr.success('Usunięto smak', 'Sukces!');
         }
       });
   }
@@ -72,7 +78,9 @@ export class ProductsService {
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
+        } else {
+          this.toastr.success('Zmieniono smak', 'Sukces!');
         }
       });
   }
