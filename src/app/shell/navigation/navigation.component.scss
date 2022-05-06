@@ -1,0 +1,10 @@
+.active {
+  background-color: #00478f;
+  color: #fff;
+  transition: 0.3s;
+
+  &:focus {
+    background-color: #00478f;
+    color: #fff;
+  }
+}
