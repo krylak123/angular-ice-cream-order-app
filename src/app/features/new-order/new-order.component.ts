@@ -22,6 +22,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
   public units$ = this.store.select(store => store.units);
   public canAddOrder = new BehaviorSubject<boolean>(true);
   public subscription!: Subscription;
+  public pickFromFavorite = false;
   public form!: FormGroup;
 
   constructor(

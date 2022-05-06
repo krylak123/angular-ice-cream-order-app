@@ -6,14 +6,22 @@
         (submit)="handleOnSubmit(user.key, user.data.currentOrder)"
         class="login__form">
         <div formArrayName="order">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="pickFromFavorite"
+            (change)="pickFromFavorite = !pickFromFavorite"
+            >Wybieraj z listy ulubionych</mat-checkbox
+          >
           <ng-container *ngFor="let order of orderControls; let idx = index">
             <div [formGroup]="order" class="input-container">
               <mat-form-field *ngIf="products$ | async as products" appearance="fill">
                 <mat-label>Smak</mat-label>
                 <mat-select formControlName="product">
-                  <mat-option *ngFor="let item of products" [value]="item.data.name">{{
-                    item.data.name
-                  }}</mat-option>
+                  <mat-option
+                    *ngFor="let item of pickFromFavorite ? user.data.favoriteIceCream : products"
+                    [value]="pickFromFavorite ? item : item.data.name"
+                    >{{ pickFromFavorite ? item : item.data.name }}</mat-option
+                  >
                 </mat-select>
                 <mat-error *ngIf="order.controls['product'].hasError('required')"
                   >Pole ilość jest wymagane</mat-error

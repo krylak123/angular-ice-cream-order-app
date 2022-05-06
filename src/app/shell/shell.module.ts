@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { RoleGuard } from '@shared/guards/role.guard';
 import { Role } from '@shared/enums/role.enum';
@@ -68,7 +69,7 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
     MatDialogModule,
     MatExpansionModule,
     MatSelectModule,
-
+    MatCheckboxModule,
     RouterModule.forChild([
       {
         path: '',
