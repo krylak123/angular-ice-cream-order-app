@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
@@ -23,7 +24,11 @@ export interface OrderList {
 export class NewOrderService {
   public user$ = this.store.select(store => store.user);
 
-  constructor(private http: HttpClient, private store: Store<AppState>) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+    private toastr: ToastrService
+  ) {}
 
   public checkUserOrders(userKey: string, currentOrder: Order, newOrder: Order) {
     this.setNewOrder(userKey, newOrder);
@@ -41,7 +46,9 @@ export class NewOrderService {
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
+        } else {
+          this.toastr.success('Dodano zamówienie', 'Sukces!');
         }
       });
   }
@@ -54,7 +61,7 @@ export class NewOrderService {
       .pipe(catchError(err => of(err)))
       .subscribe(res => {
         if (res instanceof HttpErrorResponse) {
-          console.error(res);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
         }
       });
   }
