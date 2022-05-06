@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '@environments/environment';
 
@@ -45,6 +46,7 @@ import { AppComponent } from './app.component';
       logOnly: environment.production,
       autoPause: true,
     }),
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

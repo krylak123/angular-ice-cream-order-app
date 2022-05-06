@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { environment } from '@environments/environment';
 import { Role } from '@shared/enums/role.enum';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, catchError, of } from 'rxjs';
 
 interface NewUserProps {
@@ -29,7 +30,11 @@ export class UserCreatorService {
   private isLoading = new BehaviorSubject<boolean>(false);
   private isError = new BehaviorSubject<boolean>(false);
 
-  constructor(private angularFireAuth: AngularFireAuth, private http: HttpClient) {}
+  constructor(
+    private angularFireAuth: AngularFireAuth,
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) {}
 
   public get isLoading$() {
     return this.isLoading.asObservable();
@@ -73,7 +78,9 @@ export class UserCreatorService {
       .subscribe(res => {
         this.isLoading.next(false);
         if (res instanceof HttpErrorResponse) {
-          this.updateIsError(true);
+          this.toastr.error('Wystąpił problem', 'Błąd!');
+        } else {
+          this.toastr.success('Dodano klienta', 'Sukces!');
         }
       });
   }

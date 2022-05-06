@@ -35,6 +35,8 @@ $angular-ice-cream-order-app-theme: mat.define-light-theme(
 // that you are using.
 @include mat.all-component-themes($angular-ice-cream-order-app-theme);
 
+@import '~ngx-toastr/toastr';
+
 * {
   margin: 0;
   padding: 0;
