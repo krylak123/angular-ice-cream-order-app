@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ShellComponent } from './shell.component';
 import { ContentWrapperComponent } from '@shared/content-wrapper/content-wrapper.component';
@@ -27,6 +28,7 @@ import { UnitsAddComponent } from '@features/units-list/units-add/units-add.comp
 import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
+import { NewOrderComponent } from '@features/new-order/new-order.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
     UnitsAddComponent,
     NavigationComponent,
     FavoriteListComponent,
+    NewOrderComponent,
   ],
   providers: [],
   imports: [
@@ -59,12 +62,17 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
     MatTableModule,
     MatDialogModule,
     MatExpansionModule,
+    MatSelectModule,
 
     RouterModule.forChild([
       {
         path: '',
         component: ShellComponent,
         children: [
+          {
+            path: 'orders/create',
+            component: NewOrderComponent,
+          },
           {
             path: 'users',
             component: UsersListComponent,
@@ -88,7 +96,7 @@ import { FavoriteListComponent } from '@features/favorite-list/favorite-list.com
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'products/favorite',
+            redirectTo: 'orders/create',
           },
         ],
       },

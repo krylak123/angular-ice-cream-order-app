@@ -4,7 +4,22 @@ import { UserState } from './user.state';
 
 const initialState: UserState = {
   key: '',
-  data: {},
+  data: {
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
+    role: '',
+    favoriteIceCream: [],
+    currentOrder: {
+      date: '',
+      orderList: [],
+    },
+    prevOrder: {
+      date: '',
+      orderList: [],
+    },
+  },
 };
 
 export const userReducer = createReducer(
@@ -13,7 +28,17 @@ export const userReducer = createReducer(
     return {
       ...state,
       key: props.user.key,
-      data: props.user.data,
+      data: {
+        currentOrder: {
+          date: '',
+          orderList: [],
+        },
+        prevOrder: {
+          date: '',
+          orderList: [],
+        },
+        ...props.user.data,
+      },
     };
   })
 );
