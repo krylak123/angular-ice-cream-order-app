@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormGroup } from '@angular/forms';
 import { environment } from '@environments/environment';
 import { Role } from '@shared/enums/role.enum';
 import { BehaviorSubject, catchError, of } from 'rxjs';
@@ -44,7 +43,7 @@ export class UserCreatorService {
     this.isError.next(isError);
   }
 
-  public createNewUser(props: NewUserProps, form: FormGroup) {
+  public createNewUser(props: NewUserProps) {
     const email = props.email;
     const password = props.password;
     const name = props.name;
@@ -59,7 +58,7 @@ export class UserCreatorService {
       .then(res => {
         const uid = res.user?.uid;
 
-        this.addNewUserToDB({ uid, role, name, surname, email, phone }, form);
+        this.addNewUserToDB({ uid, role, name, surname, email, phone });
       })
       .catch(() => {
         this.isLoading.next(false);
@@ -67,7 +66,7 @@ export class UserCreatorService {
       });
   }
 
-  private addNewUserToDB(user: NewUserDBProps, form: FormGroup) {
+  private addNewUserToDB(user: NewUserDBProps) {
     this.http
       .post(`${environment.firebaseConfig.databaseURL}/users.json`, user)
       .pipe(catchError(err => of(err)))
@@ -76,8 +75,6 @@ export class UserCreatorService {
         if (res instanceof HttpErrorResponse) {
           this.updateIsError(true);
         }
-
-        form.reset();
       });
   }
 }

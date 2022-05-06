@@ -13,7 +13,7 @@
           placeholder="Krystian"
           formControlName="name"
           required />
-        <mat-error *ngIf="nameControl.hasError('required')">Pole Email wymagane</mat-error>
+        <mat-error *ngIf="nameControl.hasError('required')">Pole imię wymagane</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Wpisz nazwisko</mat-label>
@@ -24,7 +24,7 @@
           placeholder="Grzelak"
           formControlName="surname"
           required />
-        <mat-error *ngIf="surnameControl.hasError('required')">Pole Email wymagane</mat-error>
+        <mat-error *ngIf="surnameControl.hasError('required')">Pole nazwisko wymagane</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Wpisz email</mat-label>
@@ -47,7 +47,7 @@
           placeholder="******"
           formControlName="password"
           required />
-        <mat-error *ngIf="passwordControl.hasError('required')">Pole Email wymagane</mat-error>
+        <mat-error *ngIf="passwordControl.hasError('required')">Pole hasło jest wymagane</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Wpisz telefon</mat-label>
@@ -58,7 +58,8 @@
           placeholder="111222333"
           formControlName="phone"
           required />
-        <mat-error *ngIf="phoneControl.hasError('required')">Pole Email wymagane</mat-error>
+        <mat-error *ngIf="phoneControl.hasError('required')">Pole telefon wymagane</mat-error>
+        <mat-error *ngIf="phoneControl.hasError('pattern')">Numer telefonu ma 9 liczb</mat-error>
       </mat-form-field>
       <mat-error *ngIf="isError$ | async">UPS... coś poszło nie tak</mat-error>
       <button

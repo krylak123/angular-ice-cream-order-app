@@ -54,9 +54,13 @@ export class UserCreatorComponent implements OnInit {
     const password = this.userCreatorForm.value['password'];
     const phone = this.userCreatorForm.value['phone'];
 
-    this.userCreatorService.createNewUser(
-      { name, surname, email, password, phone },
-      this.userCreatorForm
-    );
+    this.userCreatorService.createNewUser({ name, surname, email, password, phone });
+
+    this.userCreatorForm.reset();
+    this.nameControl.setErrors(null);
+    this.surnameControl.setErrors(null);
+    this.emailControl.setErrors(null);
+    this.passwordControl.setErrors(null);
+    this.phoneControl.setErrors(null);
   }
 }

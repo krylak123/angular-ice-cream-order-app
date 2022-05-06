@@ -13,7 +13,10 @@ export class UserCreatorFormService {
       surname: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
-      phone: this.fb.control('', [Validators.required]),
+      phone: this.fb.control('', [
+        Validators.required,
+        Validators.pattern('^((\\+91-?)|0)?[0-9]{9}$'),
+      ]),
     });
 
     return form;
