@@ -5,7 +5,7 @@ import { UnitsListService } from '@features/units-list/units-list.service';
 import { Store } from '@ngrx/store';
 import { format, parseISO } from 'date-fns';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { map, skip } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
 import { NewOrderFormService } from './new-order-form.service';
 import { NewOrderService, Order } from './new-order.service';
@@ -45,23 +45,18 @@ export class NewOrderComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.form = this.newOrderFormService.createForm();
 
-    this.subscription = this.user$
-      .pipe(
-        skip(1),
-        map(res => res.data.currentOrder.date)
-      )
-      .subscribe(date => {
-        if (!date) return this.canAddOrder.next(true);
+    this.subscription = this.user$.pipe(map(res => res.data.currentOrder.date)).subscribe(date => {
+      if (!date) return this.canAddOrder.next(true);
 
-        const orderDate = format(parseISO(date), 'dd');
-        const nowDate = format(new Date(), 'dd');
+      const orderDate = format(parseISO(date), 'dd');
+      const nowDate = format(new Date(), 'dd');
 
-        if (orderDate === nowDate) {
-          this.canAddOrder.next(false);
-        } else {
-          this.canAddOrder.next(true);
-        }
-      });
+      if (orderDate === nowDate) {
+        this.canAddOrder.next(false);
+      } else {
+        this.canAddOrder.next(true);
+      }
+    });
 
     this.productsService.getProducts();
     this.unitsListService.getUnits();
