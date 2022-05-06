@@ -29,7 +29,7 @@ export class NavigationService {
     },
     {
       name: 'Stwórz klienta',
-      path: 'users/create',
+      path: 'user/create',
       role: Role.ADMIN,
     },
     {

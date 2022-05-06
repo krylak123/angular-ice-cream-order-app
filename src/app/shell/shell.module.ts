@@ -29,6 +29,9 @@ import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
 import { NewOrderComponent } from '@features/new-order/new-order.component';
+import { Role } from '@shared/enums/role.enum';
+import { RoleGuard } from '@shared/guards/role.guard';
+import { HomeComponent } from '@features/home/home.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
     NavigationComponent,
     FavoriteListComponent,
     NewOrderComponent,
+    HomeComponent,
   ],
   providers: [],
   imports: [
@@ -70,33 +74,49 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
         component: ShellComponent,
         children: [
           {
+            path: 'home',
+            component: HomeComponent,
+          },
+          {
             path: 'orders/create',
             component: NewOrderComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.USER] },
           },
           {
             path: 'users',
             component: UsersListComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.ADMIN] },
           },
           {
-            path: 'users/create',
+            path: 'user/create',
             component: UserCreatorComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.ADMIN] },
           },
           {
             path: 'products',
             component: ProductsListComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.ADMIN] },
           },
           {
             path: 'products/favorite',
             component: FavoriteListComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.USER] },
           },
           {
             path: 'units',
             component: UnitsListComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.ADMIN] },
           },
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'orders/create',
+            redirectTo: 'home',
           },
         ],
       },
