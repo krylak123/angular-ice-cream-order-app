@@ -34,6 +34,7 @@ import { UsersListComponent } from '@features/users-list/users-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FavoriteListComponent } from '@features/favorite-list/favorite-list.component';
 import { NewOrderComponent } from '@features/new-order/new-order.component';
+import { GetOrderComponent } from '@features/get-order/get-order.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
     FavoriteListComponent,
     NewOrderComponent,
     HomeComponent,
+    GetOrderComponent,
   ],
   providers: [],
   imports: [
@@ -78,6 +80,12 @@ import { NewOrderComponent } from '@features/new-order/new-order.component';
           {
             path: 'home',
             component: HomeComponent,
+          },
+          {
+            path: 'orders/list',
+            component: GetOrderComponent,
+            canActivate: [RoleGuard],
+            data: { roles: [Role.ADMIN] },
           },
           {
             path: 'orders/create',
