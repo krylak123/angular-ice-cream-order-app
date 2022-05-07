@@ -85,9 +85,11 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 
     if (this.form.invalid) return;
 
+    const { order } = this.form.value;
+
     const newOrder: Order = {
       date: new Date(),
-      orderList: this.form.value,
+      order,
     };
 
     this.form.reset();

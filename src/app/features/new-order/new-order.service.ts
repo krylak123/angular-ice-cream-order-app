@@ -9,7 +9,7 @@ import { AppState } from 'src/app/store/app.state';
 
 export interface Order {
   date: Date;
-  orderList: OrderList[];
+  order: OrderList[];
 }
 
 export interface OrderList {

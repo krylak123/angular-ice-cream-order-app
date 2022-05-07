@@ -13,11 +13,11 @@ const initialState: UserState = {
     favoriteIceCream: [],
     currentOrder: {
       date: '',
-      orderList: [],
+      order: [],
     },
     prevOrder: {
       date: '',
-      orderList: [],
+      order: [],
     },
   },
 };
