@@ -32,10 +32,18 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  border-style: none;
+  background-color: transparent;
+  color: #fff;
+  outline-style: none;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
   letter-spacing: 0.1rem;
+  cursor: pointer;
 
   &.mobile {
     gap: 0.2rem;
+    font-size: 1.2rem;
     letter-spacing: 0;
   }
 }
