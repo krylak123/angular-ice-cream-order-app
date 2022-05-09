@@ -2,6 +2,7 @@
   <h2>Pokaż dziesiejsze zamówienia ({{ todayDay }}):</h2>
   <button mat-raised-button color="primary" (click)="getOrders()">smak + ilość</button>
   <button mat-raised-button color="primary" (click)="getOrdersByClients()">klient</button>
+
   <ng-container *ngIf="toggleTable === 'ORDERS'">
     <ng-container *ngIf="orders$ | async as data">
       <table mat-table [dataSource]="data" class="mat-elevation-z8">
@@ -28,6 +29,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <ng-container *ngIf="!data.length">brak zamówień</ng-container>
     </ng-container>
   </ng-container>
 
