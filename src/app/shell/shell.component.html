@@ -8,12 +8,12 @@
       *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <h1 class="title" [class.mobile]="isHandset$ | async">
+    <button class="title" [routerLink]="['home']" [class.mobile]="isHandset$ | async">
       Make me LOUDA
       <mat-icon aria-hidden="false" aria-label="Example home icon" color="accent"
         >favorite</mat-icon
       >
-    </h1>
+    </button>
     <button
       mat-raised-button
       color="warn"
