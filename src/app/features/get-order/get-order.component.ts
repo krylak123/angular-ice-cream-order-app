@@ -57,6 +57,11 @@ export class GetOrderComponent implements OnInit {
       .pipe(
         map(users => users.filter(user => user.data.currentOrder !== undefined)),
         map(users =>
+          users.filter(
+            user => format(parseISO(user.data.currentOrder.date), 'dd') === format(new Date(), 'dd')
+          )
+        ),
+        map(users =>
           users.map(user => {
             const { order } = user.data.currentOrder;
 
@@ -64,11 +69,6 @@ export class GetOrderComponent implements OnInit {
           })
         )
       )
-      .subscribe(res => {
-        // const final: OrderList[] = [];
-        // res.forEach(item => final.push(...item));
-        this.ordersByClient$.next(res);
-        console.log(res);
-      });
+      .subscribe(res => this.ordersByClient$.next(res));
   }
 }
