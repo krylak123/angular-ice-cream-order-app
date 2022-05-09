@@ -1,11 +1,59 @@
-<header class="header">
-  <div class="container header__container">
-    <h1>siemano</h1>
-  </div>
-</header>
-
-<main class="main">
-  <div class="container main__container">
-    <router-outlet></router-outlet>
-  </div>
-</main>
+<mat-toolbar color="primary">
+  <header class="header">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <button class="title" [routerLink]="['home']" [class.mobile]="isHandset$ | async">
+      Make me LOUDA
+      <mat-icon aria-hidden="false" aria-label="Example home icon" color="accent"
+        >favorite</mat-icon
+      >
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="handleLogOut()"
+      class="btn"
+      [class.mobile]="isHandset$ | async">
+      wyloguj
+    </button>
+  </header>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" [class.mobile]="isHandset$ | async">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'push' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <div *ngIf="user$ | async as user" class="menu__header">
+      <p class="menu__text">
+        Witaj <span class="menu__text menu__text--bold">{{ user.data.name }}</span>
+      </p>
+      <p class="menu__text">Zalogowano jako</p>
+      <span class="menu__text menu__text--bold">{{
+        user.data.role === 'ADMIN' ? 'LODZIARZ' : 'KLIENT'
+      }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <app-navigation></app-navigation>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="handleLogOut()"
+      class="btn center"
+      [class.mobile]="(isHandset$ | async) === false">
+      wyloguj
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

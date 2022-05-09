@@ -10,10 +10,17 @@ fs.readFile('.env', err => {
 
   const content = `
 export const environment = {
-  API_URL: "${process.env.API_URL}",
-  production: ${process.env.PRODUCTION}
-};
-`;
+  production: ${process.env.PRODUCTION},
+  firebaseConfig: {
+    apiKey: "${process.env.API_KEY}",
+    authDomain: "${process.env.AUTH_DOMAIN}",
+    databaseURL: "${process.env.DATABASE_URL}",
+    projectId: "${process.env.PROJECT_ID}",
+    storageBucket: "${process.env.STORAGE_BUCKET}",
+    messagingSenderId: "${process.env.MESSAGING_SENDER_ID}",
+    appId: "${process.env.APP_ID}",
+  }
+}`;
 
   fs.writeFile('./src/environments/environment.ts', content, err => {
     if (err) {

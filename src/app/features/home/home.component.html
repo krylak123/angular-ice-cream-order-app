@@ -1,0 +1,20 @@
+<ng-container *ngIf="user$ | async as user; else skeleton">
+  <h1>Siemano {{ user.data.name }} {{ user.data.surname }}</h1>
+  <p>jesteś zalogowany jako {{ user.data.role === 'ADMIN' ? 'Lodziarz' : 'Klient' }}</p>
+  <ng-container *ngIf="user.data.role === 'USER'; else admin">
+    <p>jako klient możesz</p>
+    <mat-list>
+      <mat-list-item class="list-item"> Składać zamówienia raz dziennie </mat-list-item>
+      <mat-list-item class="list-item"> Dodawać dostępne smaki do ulubionych </mat-list-item>
+      <mat-list-item class="list-item"> Mieć bardzo dobre LOUDY </mat-list-item>
+    </mat-list>
+  </ng-container>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="skeleton__title"></div>
+</ng-template>
+
+<ng-template #admin>
+  <p>pozdro z fartem robimy LOUDY</p>
+</ng-template>

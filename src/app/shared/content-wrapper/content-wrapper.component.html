@@ -1,0 +1,5 @@
+<div>
+  <h1 class="title" [class.mobile]="isHandset$ | async">{{ title }}</h1>
+  <mat-divider class="divider"></mat-divider>
+  <ng-content></ng-content>
+</div>

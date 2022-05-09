@@ -1,0 +1,74 @@
+<app-content-wrapper title="Lista ulubionych smaków">
+  <ng-container *ngIf="user$ | async as user">
+    <ng-container *ngIf="user.data.favoriteIceCream; else noresult">
+      <table mat-table [dataSource]="user.data.favoriteIceCream" class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>Lp.</th>
+          <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Ulubione smaki</th>
+          <td mat-cell *matCellDef="let element">{{ element }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Akcje</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a plus one icon"
+              (click)="removeProductsToFavorite(user.key, user.data.favoriteIceCream, element)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <p *ngIf="!user.data?.favoriteIceCream.length">brak danych</p>
+    </ng-container>
+
+    <ng-container *ngIf="dataSource$ | async as data">
+      <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>Lp.</th>
+          <td mat-cell *matCellDef="let element; let idx = index">{{ idx + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Dostępne smaki</th>
+          <td mat-cell *matCellDef="let element">{{ element.data.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Akcje</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              color="accent"
+              aria-label="Example icon button with a plus one icon"
+              [disabled]="
+                user.data.favoriteIceCream && user.data.favoriteIceCream.includes(element.data.name)
+              "
+              (click)="
+                addProductsToFavorite(user.key, user.data.favoriteIceCream, element.data.name)
+              ">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <p *ngIf="!data.length">brak danych</p>
+    </ng-container>
+  </ng-container>
+</app-content-wrapper>
+
+<ng-template #noresult>
+  <p>NIE MASZ ŻADNYCH ULUBIONYCH SMAKÓW!</p>
+</ng-template>

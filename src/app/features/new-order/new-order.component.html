@@ -1,0 +1,84 @@
+<app-content-wrapper title="Dodaj nowe zamówienie">
+  <ng-container *ngIf="canAddOrder | async; else dont">
+    <ng-container *ngIf="user$ | async as user">
+      <form
+        [formGroup]="form"
+        (submit)="handleOnSubmit(user.key, user.data.currentOrder)"
+        class="login__form">
+        <div formArrayName="order">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="pickFromFavorite"
+            (change)="pickFromFavorite = !pickFromFavorite"
+            >Wybieraj z listy ulubionych</mat-checkbox
+          >
+          <ng-container *ngFor="let order of orderControls; let idx = index">
+            <div [formGroup]="order" class="input-container">
+              <mat-form-field *ngIf="products$ | async as products" appearance="fill">
+                <mat-label>Smak</mat-label>
+                <mat-select formControlName="product">
+                  <mat-option
+                    *ngFor="let item of pickFromFavorite ? user.data.favoriteIceCream : products"
+                    [value]="pickFromFavorite ? item : item.data.name"
+                    >{{ pickFromFavorite ? item : item.data.name }}</mat-option
+                  >
+                </mat-select>
+                <mat-error *ngIf="order.controls['product'].hasError('required')"
+                  >Pole ilość jest wymagane</mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field *ngIf="units$ | async as units" appearance="fill">
+                <mat-label>Jednostka</mat-label>
+                <mat-select formControlName="unit">
+                  <mat-option *ngFor="let item of units" [value]="item.data.unit">{{
+                    item.data.unit
+                  }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="order.controls['unit'].hasError('required')"
+                  >Pole ilość jest wymagane</mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Ilość</mat-label>
+                <input formControlName="count" type="number" matInput placeholder="1337" />
+                <mat-error *ngIf="order.controls['count'].hasError('required')"
+                  >Pole ilość jest wymagane</mat-error
+                >
+              </mat-form-field>
+
+              <button
+                mat-mini-fab
+                color="warn"
+                aria-label="Example icon button with a filter list icon"
+                (click)="removeOrderItems(orderFormArray, idx)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+            </div>
+          </ng-container>
+        </div>
+
+        <button type="button" mat-raised-button color="primary" (click)="addOrderItem()">
+          dodaj kolejny smak
+        </button>
+        <button mat-raised-button color="accent" [disabled]="orderFormArray.length && form.invalid">
+          dodaj zamówienie
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          [disabled]="user.data.prevOrder.orderList?.length"
+          (click)="handleOrderLastOrder(user.key, user.data.prevOrder)">
+          zamów ostatnie zamówienie
+        </button>
+      </form>
+    </ng-container>
+  </ng-container>
+</app-content-wrapper>
+
+<ng-template #dont>
+  <p>Już dziś składałeś zamówienie!</p>
+</ng-template>
