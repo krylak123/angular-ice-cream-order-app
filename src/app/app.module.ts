@@ -22,6 +22,7 @@ import { unitsReducer } from './store/units';
 import { productReducer } from './store/product';
 
 import { AppComponent } from './app.component';
+import { ordersReducer } from './store/orders';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { AppComponent } from './app.component';
       users: usersReducer,
       units: unitsReducer,
       product: productReducer,
+      orders: ordersReducer,
     }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
