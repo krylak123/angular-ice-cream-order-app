@@ -36,7 +36,7 @@
           formControlName="email"
           required />
         <mat-error *ngIf="emailControl.hasError('required')">Pole Email wymagane</mat-error>
-        <mat-error *ngIf="emailControl.hasError('email')">To nie jest email</mat-error>
+        <mat-error *ngIf="emailControl.hasError('pattern')">To nie jest email</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Wpisz hasło</mat-label>
